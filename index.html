@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的项目</title>
+    <title>CEFM: Explainable Melanoma Diagnosis</title>
     <style>
         * {
             margin: 0;
@@ -12,156 +12,488 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
         
+        /* Header Styles */
         header {
             text-align: center;
-            padding: 60px 0 40px;
-            border-bottom: 2px solid #eee;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
         }
         
         h1 {
             font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
         }
         
         .authors {
-            font-size: 1.2em;
-            color: #555;
-            margin: 10px 0;
+            font-size: 1.1em;
+            margin: 25px 0 15px;
+            line-height: 1.8;
         }
         
+        .author {
+            display: inline;
+        }
+        
+        .author sup {
+            font-size: 0.8em;
+            margin-left: 2px;
+        }
+        
+        .affiliations {
+            font-size: 0.95em;
+            margin: 20px auto;
+            max-width: 900px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .affiliation-item {
+            margin: 8px 0;
+        }
+        
+        .corresponding {
+            font-size: 0.9em;
+            margin-top: 15px;
+            font-style: italic;
+            opacity: 0.85;
+        }
+        
+        /* Links Section */
         .links {
-            margin-top: 20px;
+            margin: 30px 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
         
         .links a {
-            display: inline-block;
-            margin: 0 10px;
-            padding: 10px 20px;
-            background: #3498db;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         
         .links a:hover {
-            background: #2980b9;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
+        /* Section Styles */
         section {
-            margin: 40px 0;
-            padding: 20px 0;
+            margin: 50px 0;
+            padding: 0 30px;
         }
         
         h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
             padding-bottom: 10px;
+            font-weight: 600;
         }
         
+        /* Abstract */
         .abstract {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 5px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .demo {
-            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%);
             padding: 30px;
-            background: #f8f9fa;
-            border-radius: 5px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            font-size: 1.05em;
+            line-height: 1.8;
+            text-align: justify;
         }
         
-        .demo img {
+        /* Highlights */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .highlight-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .highlight-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .highlight-card p {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        
+        /* Method Section */
+        .method-overview {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .method-image {
             max-width: 100%;
             height: auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            margin: 20px 0;
         }
         
-        pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-size: 0.9em;
+        .method-description {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+            line-height: 1.8;
         }
         
-        code {
+        /* Results */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .result-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .result-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .result-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 15px 0;
+        }
+        
+        .result-label {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* Citation */
+        .citation-box {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
             font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #764ba2;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f8f9fa;
+            color: #666;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 60px;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .authors {
+                font-size: 1em;
+            }
+            
+            section {
+                padding: 0 15px;
+            }
+            
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .links a {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        section {
+            animation: fadeIn 0.6s ease-out;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>项目标题</h1>
-            <p class="authors">作者姓名¹, 合作者²</p>
-            <p class="affiliation">¹机构A, ²机构B</p>
+            <h1>CEFM: Explainable Melanoma Diagnosis with Contrastive Learning and LLM-based Report Generation</h1>
+            
+            <div class="authors">
+                <span class="author">Junwen Zheng<sup>1</sup></span>,
+                <span class="author">Xinran Xu<sup>2</sup></span>,
+                <span class="author">Li Rong Wang<sup>1,3</sup></span>,
+                <span class="author">Chang Cai<sup>2</sup></span>,
+                <span class="author">Lucinda Siyun Tan<sup>4</sup></span>,
+                <span class="author">Wang Ding Yuan<sup>4</sup></span>,
+                <span class="author">Tey Hong Liang<sup>2,4</sup>*</span>,
+                <span class="author">Xiuyi Fan<sup>1,2</sup>*</span>
+            </div>
+            
+            <div class="affiliations">
+                <div class="affiliation-item"><sup>1</sup>College of Computing and Data Science, Nanyang Technological University, Singapore</div>
+                <div class="affiliation-item"><sup>2</sup>Lee Kong Chian School of Medicine, Nanyang Technological University, Singapore</div>
+                <div class="affiliation-item"><sup>3</sup>Centre for Frontier AI Research, Agency for Science, Technology and Research (A*STAR), Singapore</div>
+                <div class="affiliation-item"><sup>4</sup>National Skin Centre, Singapore and Centre for Medical Technologies and Innovation, National Healthcare Group, Singapore</div>
+            </div>
+            
+            <div class="corresponding">*Corresponding authors</div>
             
             <div class="links">
-                <a href="paper.pdf" target="_blank">📄 论文</a>
-                <a href="https://github.com/你的用户名/仓库名" target="_blank">💻 代码</a>
-                <a href="#demo">🎮 演示</a>
+                <a href="#paper">📄 Paper</a>
+                <a href="#code">💻 Code (Coming Soon)</a>
+                <a href="#abstract">📖 Abstract</a>
+                <a href="#citation">📝 Citation</a>
             </div>
         </header>
 
-        <section>
-            <h2>摘要</h2>
+        <section id="abstract">
+            <h2>Abstract</h2>
             <div class="abstract">
-                <p>
-                    在这里写你的项目简介。描述你的项目解决了什么问题，使用了什么方法，
-                    取得了什么成果。这段文字应该简洁明了，让读者快速了解你的工作。
-                </p>
-            </div>
-        </section>
-
-        <section id="demo">
-            <h2>效果展示</h2>
-            <div class="demo">
-                <p>在这里添加图片、视频或交互式演示</p>
-                <!-- 示例：添加图片 -->
-                <!-- <img src="images/result.png" alt="效果图"> -->
+                Deep learning has demonstrated expert-level performance in melanoma classification, positioning it as a powerful tool in clinical dermatology. However, model opacity and the lack of interpretability remain critical barriers to clinical adoption, as clinicians often struggle to trust the decision-making processes of black-box models. To address this gap, we present a <strong>Cross-modal Explainable Framework for Melanoma (CEFM)</strong> that leverages contrastive learning as the core mechanism for achieving interpretability. Specifically, CEFM maps clinical criteria for melanoma diagnosis—namely <strong>Asymmetry, Border, and Color (ABC)</strong>—into the Vision Transformer embedding space using dual projection heads, thereby aligning clinical semantics with visual features. The aligned representations are subsequently translated into structured textual explanations via natural language generation, creating a transparent link between raw image data and clinical interpretation. Experiments on public datasets demonstrate <strong>92.79% accuracy</strong> and an <strong>AUC of 0.961</strong>, along with significant improvements across multiple interpretability metrics. Qualitative analyses further show that the spatial arrangement of the learned embeddings aligns with clinicians' application of the ABC rule, effectively bridging the gap between high-performance classification and clinical trust.
             </div>
         </section>
 
         <section>
-            <h2>方法</h2>
-            <p>详细描述你的方法论、技术细节等。</p>
+            <h2>Key Highlights</h2>
+            <div class="highlights">
+                <div class="highlight-card">
+                    <h3>🎯 High Accuracy</h3>
+                    <p>Achieves 92.79% accuracy with AUC of 0.961 on melanoma classification</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>🔍 Explainable AI</h3>
+                    <p>Aligns clinical ABC criteria with visual features for transparent diagnosis</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>🤖 LLM Integration</h3>
+                    <p>Generates structured textual reports bridging AI and clinical practice</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>🏥 Clinical Trust</h3>
+                    <p>Bridges the gap between high-performance AI and clinical adoption</p>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <h2>引用</h2>
-            <pre><code>@inproceedings{你的项目2025,
-  title={你的项目标题},
-  author={作者姓名},
-  booktitle={会议名称},
+        <section id="method">
+            <h2>Method Overview</h2>
+            <div class="method-description">
+                <p><strong>CEFM Framework Components:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
+                    <li><strong>Contrastive Learning:</strong> Maps clinical ABC criteria into Vision Transformer embedding space</li>
+                    <li><strong>Dual Projection Heads:</strong> Aligns clinical semantics with visual features</li>
+                    <li><strong>Vision Transformer Backbone:</strong> Extracts high-level visual representations</li>
+                    <li><strong>Natural Language Generation:</strong> Translates aligned representations into structured clinical reports</li>
+                </ul>
+            </div>
+            
+            <div class="method-overview">
+                <!-- Placeholder for method diagram -->
+                <div style="background: #f0f0f0; padding: 60px; border-radius: 10px; margin: 30px 0;">
+                    <p style="color: #666; font-size: 1.1em;">Method Architecture Diagram</p>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 10px;">(Add your architecture diagram here)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="results">
+            <h2>Results</h2>
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-label">Accuracy</div>
+                    <div class="result-value">92.79%</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">AUC Score</div>
+                    <div class="result-value">0.961</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">Interpretability</div>
+                    <div class="result-value">✓</div>
+                    <p style="margin-top: 10px; color: #666;">Significant improvements across metrics</p>
+                </div>
+                <div class="result-card">
+                    <div class="result-label">ABC Alignment</div>
+                    <div class="result-value">✓</div>
+                    <p style="margin-top: 10px; color: #666;">Matches clinical application</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="citation">
+            <h2>Citation</h2>
+            <div class="citation-box">
+                <button class="copy-btn" onclick="copyCitation()">Copy</button>
+<pre>@inproceedings{zheng2025cefm,
+  title={Explainable Melanoma Diagnosis with Contrastive Learning 
+         and LLM-based Report Generation},
+  author={Zheng, Junwen and Xu, Xinran and Wang, Li Rong and 
+          Cai, Chang and Tan, Lucinda Siyun and Yuan, Wang Ding and 
+          Liang, Tey Hong and Fan, Xiuyi},
+  booktitle={International Conference on Computer Vision},
   year={2025}
-}</code></pre>
+}</pre>
+            </div>
         </section>
 
-        <footer style="text-align: center; padding: 40px 0; color: #999; border-top: 1px solid #eee; margin-top: 60px;">
-            <p>© 2025 你的名字. All rights reserved.</p>
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="method-description">
+                <p>For questions or collaboration opportunities, please contact:</p>
+                <ul style="margin-left: 20px; margin-top: 15px; line-height: 2;">
+                    <li>Tey Hong Liang: <a href="mailto:teyhongliang@ntu.edu.sg" style="color: #667eea;">teyhongliang@ntu.edu.sg</a></li>
+                    <li>Xiuyi Fan: <a href="mailto:xyfan@ntu.edu.sg" style="color: #667eea;">xyfan@ntu.edu.sg</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 CEFM Project Team. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Nanyang Technological University, Singapore</p>
         </footer>
     </div>
+
+    <script>
+        function copyCitation() {
+            const citation = `@inproceedings{zheng2025cefm,
+  title={Explainable Melanoma Diagnosis with Contrastive Learning and LLM-based Report Generation},
+  author={Zheng, Junwen and Xu, Xinran and Wang, Li Rong and Cai, Chang and Tan, Lucinda Siyun and Yuan, Wang Ding and Liang, Tey Hong and Fan, Xiuyi},
+  booktitle={International Conference on Computer Vision},
+  year={2025}
+}`;
+            
+            navigator.clipboard.writeText(citation).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                btn.style.background = '#48bb78';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#667eea';
+                }, 2000);
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
